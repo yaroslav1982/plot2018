@@ -1,0 +1,1138 @@
+<HTML><HEAD>
+<TITLE>plot datafile</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=windows-1251">
+<LINK href="styles.css" 
+type=text/css rel=stylesheet>
+<SCRIPT src="edu2007/img.js" 
+type=text/javascript>
+//alert('8');
+
+window.onload=init; 
+
+function init() {
+onlyL3(); 
+redC2();
+}
+
+</script>
+
+<script>
+function changeText()
+{
+ document.getElementById('boldStuff').innerHTML = document.getElementById('inputTextToSave').value;
+}
+
+function changeZero()
+{
+ document.getElementById('boldStuff').innerHTML = 'blank';
+}
+
+function changeT2()
+{
+
+var tW='500';
+var tH='500';
+var x350='100';
+var y="100";
+
+
+var ach="<svg version='1.1' width="+tW+" height="+tH+" xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'>";
+
+ach=ach+"\n"+"<polyline fill='none' stroke='#008000' stroke-width='0.5' points='";
+
+ach=ach+"200,208 288.8889,232 377.7778,272 466.6667,328 555.5556,400 644.4444,488 733.3333,592 822.2222,712 911.1111,848 1000,1000"+ "' />";
+
+ach=ach+"\n"+"<text x='"+x350+"' y='"+y+"' fill='black' font-family='Arial' font-size='10'>"+x350+"</text>";
+
+
+ach=ach+"\n"+"</svg>";
+
+
+//document.getElementById('boldStuff').innerHTML = ach;//
+document.getElementById('inputTextToSave').value=ach;
+}
+
+function polysvg(poly, ox, oy)
+{
+
+var tW='500';
+var tH='500';
+var x350='100';
+var y="100";
+
+
+var ach="<svg version='1.1' width='"+tW+"' height='"+tH+"' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'>";
+
+ach=ach+"\n"+"<polyline fill='none' stroke='#008000' stroke-width='0.5' points='";
+
+ach=ach+poly+ "' />";
+
+//ach=ach+"\n"+"<text x='"+x350+"' y='"+y+"' fill='black' font-family='Arial' font-size='10'>"+x350+"</text>";
+
+var textArray = ox.split("\n");
+var textArray2 = oy.split("\n");
+var Tneo='';
+var TneoA='';
+
+var Yneo='';
+var YneoA='';
+
+var temp=0.1;
+var temp2=0.1;
+var temps=['0.1','4'];
+var tBak=['0.1','4'];
+
+//OX shift (down)=<textarea id="y330" name="y330" cols="10" rows="1">0</textarea>
+
+var OXsh=document.getElementById('y330').value
+
+ach=ach+"\n"+"<polyline fill='none' stroke='#008000' stroke-width='0.5' points='";
+ach=ach+"0"+","+OXsh+" "+"500"+","+OXsh+"' />";
+
+var OYsh=document.getElementById('x330').value
+
+ach=ach+"\n"+"<polyline fill='none' stroke='#008000' stroke-width='0.5' points='"+OYsh+",";
+ach=ach+"0"+" "+OYsh+","+"500"+"' />";
+
+var nOXsh1=parseFloat(OXsh)+10;
+var OXsh1=nOXsh1.toString();
+
+var nOYsh1=parseFloat(OYsh)+10;
+var OYsh1=nOYsh1.toString();
+
+//alert(OXsh+";"+OYsh+";"+OXsh1+";"+OYsh1);
+
+var pprov=0;
+
+for(var i=0; i<textArray.length;i++) 
+{
+temps= textArray[i].split("\t");
+//temp=(parseFloat(temps[1])-parseFloat(tBak[1]))/(parseFloat(temps[0])-parseFloat(tBak[0]));
+pprov=parseFloat(temps[0])*parseFloat(temps[1]);
+
+//temp2=(parseFloat(temps[2])-parseFloat(tBak[2]))/(parseFloat(temps[0])-parseFloat(tBak[0]));
+//Tneo=Tneo+textArray[i]+'\t'+temp+'\t'+temp2+'\n';
+//Tneo=Tneo+temps[0]+';';
+//TneoA=TneoA+temps[1]+';';
+
+if (pprov) {
+ach=ach+"\n"+"<polyline fill='none' stroke='#008000' stroke-width='0.5' points='";
+ach=ach+temps[1]+","+OXsh+" "+temps[1]+","+OXsh1+"' />";
+ach=ach+"\n"+"<text x='"+temps[1]+"' y='"+OXsh1+"' fill='black' font-family='Arial' font-size='10'>"+temps[0]+"</text>";
+}
+
+//
+
+//tBak=temps;
+}
+
+for(var i=0; i<textArray2.length;i++) 
+{
+temps= textArray2[i].split("\t");
+
+//<text x='176.66666666667' y='0.0001' fill='black' font-family='Arial' font-size='10'>120</text>
+//<polyline fill='none' stroke='#008000' stroke-width='0.5' points='166.66666666667,0.0001 176.66666666667,0.0001' />
+
+ach=ach+"\n"+"<polyline fill='none' stroke='#008000' stroke-width='0.5' points='"+OYsh+",";
+ach=ach+temps[1]+" "+OYsh1+","+temps[1]+"' />";
+ach=ach+"\n"+"<text x='"+OYsh1+"' y='"+temps[1]+"' fill='black' font-family='Arial' font-size='10'>"+temps[0]+"</text>";
+//
+
+//tBak=temps;
+}
+
+
+ach=ach+"\n"+"</svg>";
+
+
+//document.getElementById('boldStuff').innerHTML = ach;//
+//document.getElementById('inputTextToSave').value=ach;
+return ach;
+}
+
+function xsvg(ox, oy)
+{
+
+var tW='500';
+var tH='500';
+var x350='100';
+var y="100";
+
+var textArray = ox.split("\n");
+var textArray2 = oy.split("\n");
+
+var Tneo='';
+var TneoA='';
+
+var Yneo='';
+var YneoA='';
+
+var temp=0.1;
+var temp2=0.1;
+var temps=['0.1','4'];
+var tBak=['0.1','4'];
+
+//var ach="1";
+var ach="<svg version='1.1' width="+tW+" height="+tH+" xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'>";
+
+
+for(var i=0; i<textArray.length;i++) 
+{
+temps= textArray[i].split("\t");
+//temp=(parseFloat(temps[1])-parseFloat(tBak[1]))/(parseFloat(temps[0])-parseFloat(tBak[0]));
+//temp2=(parseFloat(temps[2])-parseFloat(tBak[2]))/(parseFloat(temps[0])-parseFloat(tBak[0]));
+//Tneo=Tneo+textArray[i]+'\t'+temp+'\t'+temp2+'\n';
+//Tneo=Tneo+temps[0]+';';
+//TneoA=TneoA+temps[1]+';';
+
+ach=ach+"\n"+"<polyline fill='none' stroke='#008000' stroke-width='0.5' points='";
+ach=ach+temps[1]+",428 "+temps[1]+",438' />";
+ach=ach+"\n"+"<text x='"+temps[1]+"' y='438.57142857143' fill='black' font-family='Arial' font-size='10'>"+temps[0]+"</text>";
+//
+
+//tBak=temps;
+}
+
+for(var i=0; i<textArray2.length;i++) 
+{
+temps= textArray2[i].split("\t");
+
+//<text x='176.66666666667' y='0.0001' fill='black' font-family='Arial' font-size='10'>120</text>
+//<polyline fill='none' stroke='#008000' stroke-width='0.5' points='166.66666666667,0.0001 176.66666666667,0.0001' />
+
+ach=ach+"\n"+"<polyline fill='none' stroke='#008000' stroke-width='0.5' points='166.66666666667,";
+ach=ach+temps[1]+" 176.66666666667,"+temps[1]+"' />";
+ach=ach+"\n"+"<text x='176.66666666667' y='"+temps[1]+"' fill='black' font-family='Arial' font-size='10'>"+temps[0]+"</text>";
+//
+
+//tBak=temps;
+}
+
+
+ach=ach+"\n"+"</svg>";
+
+//alert(Tneo+";;"+TneoA);
+//alert(ach);
+
+
+
+//ach=ach+poly+ "' />";
+
+//ach=ach+"\n"+"<text x='"+x350+"' y='"+y+"' fill='black' font-family='Arial' font-size='10'>"+x350+"</text>";
+
+
+//ach=ach+"\n"+"</svg>";
+
+
+//document.getElementById('boldStuff').innerHTML = ach;//
+//document.getElementById('inputTextToSave').value=ach;
+return ach;
+}
+
+
+
+function changeT5()
+{
+
+var tW='500';
+var tH='500';
+var x350='100';
+var y="100";
+var z=document.getElementById('fh').value;
+
+var ach="<svg version='1.1' width="+tW+" height="+tH+" xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'>";
+
+ach=ach+"\n"+textPlus("100", "100", "100");
+ach=ach+"\n"+textPlus("200", "200", "200");
+ach=ach+"\n"+textPlus("300", "300", "300");
+
+//ach=ach+"\n"+"<polyline fill='none' stroke='#008000' stroke-width='0.5' points='"+document.getElementById('frameheight').value+"' />";
+ach=ach+"\n"+"<polyline fill='none' stroke='#008000' stroke-width='0.5' points='"+z+"' />";
+
+ach=ach+"\n"+"</svg>";
+
+
+document.getElementById('inputTextToSave').value=ach;
+}
+
+function changeT3()
+{
+
+var tW='1000';
+var tH='1000';
+var x350='100';
+var y="100";
+
+
+var ach="<svg version='1.1' width="+tW+" height="+tH+" xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'>";
+
+//ach=ach+"\n"+"<polyline fill='none' stroke='#008000' stroke-width='0.5' points='";
+
+//ach=ach+"200,208 288.8889,232 377.7778,272 466.6667,328 555.5556,400 644.4444,488 733.3333,592 822.2222,712 911.1111,848 //1000,1000"+ "' />";
+
+ach=ach+"\n"+"<text x='"+x350+"' y='"+y+"' fill='black' font-family='Arial' font-size='10'>"+x350+"</text>";
+
+
+ach=ach+"\n"+"</svg>";
+
+
+//document.getElementById('boldStuff').innerHTML = ach;//
+document.getElementById('inputTextToSave').value=ach;
+}
+
+function alertText()
+{
+
+var tW=document.getElementById('fw').value;
+var tH=document.getElementById('fh').value;
+
+//var tW=document.getElementById('fw').value;
+var targ=document.getElementById('target').value;
+
+//alert (targ);
+
+//alert (tW+"!!!"+tH);
+
+
+var textArray = tW.split("\n");
+
+var Tneo='';
+var TneoA='';
+
+var Yneo='';
+var YneoA='';
+
+var temp=0.1;
+var temp2=0.1;
+var temps=['0.1','4'];
+var tBak=['0.1','4'];
+for(var i=0; i<textArray.length;i++) 
+{
+temps= textArray[i].split("\t");
+//temp=(parseFloat(temps[1])-parseFloat(tBak[1]))/(parseFloat(temps[0])-parseFloat(tBak[0]));
+//temp2=(parseFloat(temps[2])-parseFloat(tBak[2]))/(parseFloat(temps[0])-parseFloat(tBak[0]));
+//Tneo=Tneo+textArray[i]+'\t'+temp+'\t'+temp2+'\n';
+Tneo=Tneo+temps[0]+';';
+TneoA=TneoA+temps[1]+';';
+//tBak=temps;
+}
+///alert (Tneo+"!!!"+TneoA);
+
+//alert(smart3(Tneo, TneoA, 1));
+
+//////////////////////////////////
+var textArrayY = tH.split("\n");
+
+for(var i=0; i<textArrayY.length;i++) 
+{
+temps= textArrayY[i].split("\t");
+
+//localStorage.getItem('varOX');
+Yneo=Yneo+temps[0]+';';
+YneoA=YneoA+temps[1]+';';
+//tBak=temps;
+}
+//alert (Yneo+"!!!"+YneoA);
+
+//alert(smart3(Yneo, YneoA, 0.005));
+
+//////////////////////////////////
+
+var textArrayT = targ.split("\n");
+
+var xyT='';
+var xyNEO='';
+
+//var nOX=parseFloat(localStorage.getItem('varOX'));
+var nOX=parseFloat(document.getElementById('fwBox').value);
+//document.getElementById('fwBox').value
+//var nOY=parseFloat(localStorage.getItem('varOY'));
+var nOY=parseFloat(document.getElementById('fhBox').value);
+
+var pprov=0;
+
+for(var i=0; i<textArrayT.length;i++) 
+{
+temps= textArrayT[i].split("\t");
+
+xyT=temps[nOX]+';'+temps[nOY];
+
+pprov=parseFloat(temps[nOX])*parseFloat(temps[nOY]);
+
+if (pprov) {
+//xyNEO=xyNEO+xyT+'!!';//getts2d(xyT,Tneo, Yneo, TneoA, YneoA)+'!!';
+xyNEO=xyNEO+getts2d(xyT,Tneo, Yneo, TneoA, YneoA)+'\n';
+//tBak=temps;
+}
+
+}
+
+//alert(xyT+"\n"+Tneo+"\n"+Yneo+"\n"+TneoA+"\n"+YneoA+"\n\n\n"+"!!!");
+
+xyNEO = xyNEO.replace(/;/g, ','); 
+
+xyNEO = polysvg(xyNEO, tW, tH);
+
+//alert (xyNEO);
+
+document.getElementById('inputTextToSave').value=xyNEO;
+
+//var tests=getts2d("1;14", "1;2;3;4;5", "12;14;16;18;20", "100;200;300;400;500", "1;2;3;4;5");
+//alert(tests);
+
+    //document.getElementById("target").value = Tneo;
+
+
+//document.getElementById('boldStuff').innerHTML = ach;//
+//document.getElementById('inputTextToSave').value=ach;
+}
+
+function alertOX()
+{
+var tW=document.getElementById('fw').value;
+var tH=document.getElementById('fh').value;
+
+var tW2=xsvg(tW, tH);
+//alert(xsvg(tW));
+
+document.getElementById('inputTextToSave').value=tW2;
+
+}
+
+
+</script>
+
+<script src="jquery-1.12.0.min.js"></script>
+        <script src="out2.js"></script>
+        <script src="out3.js"></script>
+ 
+</HEAD>
+
+
+
+
+        <script src="jquery-1.12.0.min.js"></script>
+        <script src="raphael.min.js"></script>
+<LINK href="over.css" 
+type=text/css rel=stylesheet>
+
+
+Нажмите PLOT <button onclick="var a0=document.getElementById('XPERS').value; var b0=document.getElementById('ABCD').value; var ab=DeltaRange(a0,10); var bc=trioseq(ab)+';'; var de=bc.split(';;'); var fg=de[0]; var hi=props(fg,b0); document.getElementById('fw').value=hi; a0=document.getElementById('YPERS').value; b0=document.getElementById('YBCD').value; ab=DeltaRange(a0,10); bc=trioseq(ab)+';'; de=bc.split(';;'); fg=de[0]; hi=props(fg,b0); document.getElementById('fh').value=hi; alertText(); changeText()">!!! PLOT !!!</button>
+
+<input type='button' onclick='changeZero()' value='CLS'/>
+
+<input type='button' onclick='var bc=document.getElementById("bibi").value; alert (bc); var ab=DeltaRange(bc,10); alert(ab)' value='TEST'/>
+
+<input type='button' onclick='var bc=document.getElementById("bibi").value; alert (bc); var ab=trioseq(bc); alert(ab)' value='TEST2'/>
+
+<button onclick="saveTextAsFile()">Save SVG</button>
+
+<br>
+
+    <input id="rect" value="Draw Rectangle" type="button"/>
+    <input id="unbind" value="Move Rectangle" type="button"/>
+<input id="del" value="Delete Rectangle" type="button"/>
+<input id="ren" value="Rename Rectangle" type="button"/>
+    <input id="clr" value="Clear All" type="button"/>
+    
+
+<textarea id="bibi">111</textarea>
+    <div class="paper" id="svg_paper"/>
+
+<div class="floatTL">
+about
+</div>
+
+<div class="floatTL">
+
+<b id='boldStuff'>SVG</b> 
+
+</div>
+
+
+
+<script>
+
+window.onload=init; 
+
+function init() {
+}
+
+
+$(function () {
+var ii=0;
+var iitek=0;
+var imas=[];
+            var mouseDownX = 0;
+            var mouseDownY = 0;
+            var elemClicked;
+            var rect;
+            var arrow;
+
+            var paper = Raphael("svg_paper", 800, 600);
+
+    // Draw Rect
+            function DrawRectangle(x, y, w, h) {
+
+                var element = paper.rect(x, y, w, h);
+                element.attr({
+                    fill: "gray",
+                    opacity: .5,
+                    stroke: "#F00"
+                }).node.setAttribute('id', 'myElement');                                
+                
+                $(element.node).attr('id', ii);
+imas.push(1);
+ii=ii+1;
+                console.log(element.attr('x') + " - " + element.attr('y'));                
+                
+                element.drag(move, start, up);                
+
+                element.click(function (e) {
+                    elemClicked = $(element.node).attr('id');
+                });
+
+                return element;                
+
+            }
+    
+
+
+    // Start, move, and up are the drag functions
+            start = function () {
+    // storing original coordinates
+                this.ox = this.attr("x");
+                this.oy = this.attr("y");
+                this.attr({
+                    opacity: 1
+                });
+
+iitek=this.node.getAttribute('id').toString();
+
+                if (this.attr("y") < 60 && this.attr("x") < 60) this.attr({
+                    fill: "#000000"
+                });
+            }, move = function (dx, dy) {               
+
+    // Move will be called with dx and dy
+var xx=this.attr("x");
+var yy=this.attr("y");
+var ww=this.attr("width");
+var hh=this.attr("height");
+
+
+//.node.setAttribute('id'
+var qw1=xx.toString()+";"+yy.toString()+";"+ww.toString()+";"+hh.toString()+";"+this.node.getAttribute('id');
+//alert(qw1);
+document.getElementById('bibi').value=qw1;
+ 
+               if (this.attr("y") > 600 || this.attr("x") > 800) this.attr({
+                    x: this.ox + dx,
+                    y: this.oy + dy
+                });
+                else {
+                    nowX = Math.min(800, this.ox + dx);
+                    nowY = Math.min(600, this.oy + dy);
+                    nowX = Math.max(0, nowX);
+                    nowY = Math.max(0, nowY);
+                    this.attr({
+                        x: nowX,
+                        y: nowY
+                    });                   
+                    
+                    if (this.attr("fill") != "#000000") this.attr({
+                        fill: "#000000"
+                    });
+                }
+
+            }, up = function () {
+    // restoring state
+                this.attr({
+                    opacity: .5
+                });
+                if (this.attr("y") < 60 && this.attr("x") < 60) this.attr({
+                    fill: "#AEAEAE"
+                });
+            };
+
+    // Rect button click
+            $("#rect").click(function (e) {
+                $('#svg_paper').unbind('mousedown');
+                $('#svg_paper').unbind('mousemove');
+                $('#svg_paper').unbind('mouseup');
+
+                $("#svg_paper").mousedown(function (e) {
+    // Prevent text edit cursor while dragging in webkit browsers
+                    e.originalEvent.preventDefault();
+
+                    var offset = $("#svg_paper").offset();
+                    mouseDownX = e.pageX - offset.left;
+                    mouseDownY = e.pageY - offset.top;
+
+                    rect = DrawRectangle(mouseDownX, mouseDownY, 0, 0);                    
+
+                    $("#svg_paper").mousemove(function (e) {
+                        var offset = $("#svg_paper").offset();
+                        var upX = e.pageX - offset.left;
+                        var upY = e.pageY - offset.top;
+
+                        var width = upX - mouseDownX;
+                        var height = upY - mouseDownY;                       
+
+                        rect.attr({ "width": width > 0 ? width : 0,
+                            "height": height > 0 ? height : 0 });
+   
+                    });
+                    
+                    
+                });
+
+                $("#svg_paper").mouseup(function (e) {
+                    $('#svg_paper').unbind('mousemove');
+                    var BBox = rect.getBBox();
+                    console.log(BBox.width + " - " + BBox.height);                    
+                    
+                    if (BBox.width == 0 && BBox.height == 0) rect.remove();
+                });               
+
+            });
+
+
+    // Unbind events
+            $("#unbind").click(function (e) {
+//alert('yuy');
+
+var i = 0;
+var skaz2="";
+paper.forEach(function (el) 
+{
+var ij1=parseFloat(el.node.getAttribute("id"));
+    if (imas[ij1]==1) skaz2=skaz2+";;"+el.node.getAttribute("id")+";"+el.attr("x")+";"+el.attr("y")+";"+imas[ij1];
+});
+
+var skaz="";
+alert(skaz2);
+
+		$('#svg_paper').find('rect').each(function(i, obj) {
+                        skaz=skaz+";"+$(this.node).attr('id');
+                    });
+                $('#svg_paper').unbind('mouseup');
+                $('#svg_paper').unbind('mousemove');
+                $('#svg_paper').unbind('mousedown');
+//alert(skaz);
+            });
+
+    // Clear canvas
+            $("#clr").click(function (e) {
+                paper.clear();
+            });
+
+    // Delete rect
+            $("#del").click(function (e) {
+                $('#' + elemClicked).remove();
+imas[iitek]=0;
+var ir=iitek.toString();
+alert(ir);
+            });
+
+    // Rename rect
+            $("#ren").click(function (e) {
+                $('#' + elemClicked).attr('id', 100500);
+imas[iitek]=1;
+alert('100500');
+            });
+
+
+        });
+
+
+
+
+</script>
+
+
+
+
+
+
+
+
+<body>
+
+<SCRIPT type=text/javascript>
+window.onload=init;
+function init() {
+//////////////////////////////alert('User data loaded');
+//alert('varOX');
+//alert('varOY');
+//var ab=localStorage.getItem('variableName'); 
+//document.getElementById('target').value=ab;
+
+//var ab=localStorage.getItem('variableName'); 
+//document.getElementById('target').value=ab;
+
+//var Xr=localStorage.getItem('varXrange'); 
+//document.getElementById('XPERS').value=Xr;
+
+//var Yr=localStorage.getItem('varYrange'); 
+//document.getElementById('YPERS').value=Yr;
+}
+</SCRIPT>
+
+<!-- /Yandex.Metrika counter
+<button onclick="var ab=localStorage.getItem('variableName'); document.getElementById('target').value=ab;">User Data</button>
+        <input type="button" value="getRECT" onclick="getRECT();">
+
+<select id="selectX" size="5" multiple="multiple" onclick="alertOptionSelected(); alert('7'); getRECT();">
+</select>
+<select id="sel2" size="5" multiple="multiple" onclick="alertOptionSelected(); getRECT();">
+</select>
+
+<textarea id="scaR" name="scaR" cols="50" rows="4" WRAP = "off" oninput="alert('5'); getRECT();">5</textarea>
+ -->
+
+
+<br>
+	
+Plot shift (right)=<textarea id="tW1" name="tW1" cols="10" rows="1">0</textarea>
+Width=<textarea id="tW2" name="tW2" cols="10" rows="1">500</textarea>
+Stretch=<textarea id="st1" name="st1" cols="10" rows="1">1</textarea>
+Scale=<textarea id="sca1" name="sca1" cols="20" rows="2">0;1</textarea>
+
+<br>
+Plot shift (down)=<textarea id="tH1" name="tH1" cols="10" rows="1">0</textarea>
+Height=<textarea id="tH2" name="tH2" cols="10" rows="1">500</textarea>
+Stretch=<textarea id="st2" name="st2" cols="10" rows="1">1</textarea>
+Scale=<textarea id="sca2" name="sca2" cols="20" rows="2">0;1</textarea>
+<br>
+OX shift (down)=<textarea id="y330" name="y330" cols="10" rows="1">0</textarea>
+OX tick (height)=<textarea id="y340" name="y340" cols="10" rows="1">10</textarea>
+OX sign (down)=<textarea id="y350" name="y350" cols="10" rows="1">10</textarea>
+<br>
+OY shift (right)=<textarea id="x330" name="x330" cols="10" rows="1">0</textarea>
+OY tick (width)=<textarea id="x340" name="x340" cols="10" rows="1">10</textarea>
+OY sign (right)=<textarea id="x350" name="x350" cols="10" rows="1">10</textarea>
+<br>
+<br>
+<textarea id="target" name="target" cols="80" rows="25" onclick="this.value = this.value.replace(/[;]/g, '\t');this.value = this.value.replace(/[ ]/g, '\t');this.value = this.value.replace(' ', '\t')">
+1	1	0.8414709848078965
+1.1	1.2100000000000002	0.8912073600614354
+1.2000000000000002	1.4400000000000004	0.9320390859672264
+1.3000000000000003	1.6900000000000006	0.9635581854171931
+1.4000000000000004	1.960000000000001	0.9854497299884603
+1.5000000000000004	2.2500000000000013	0.9974949866040544
+1.6000000000000005	2.560000000000002	0.9995736030415051
+1.7000000000000006	2.890000000000002	0.9916648104524686
+1.8000000000000007	3.2400000000000024	0.973847630878195
+1.9000000000000008	3.610000000000003	0.9463000876874142
+2.000000000000001	4.0000000000000036	0.9092974268256814
+2.100000000000001	4.410000000000004	0.8632093666488733
+2.200000000000001	4.840000000000004	0.8084964038195895
+2.300000000000001	5.290000000000005	0.7457052121767194
+2.4000000000000012	5.760000000000006	0.67546318055115
+2.5000000000000013	6.250000000000007	0.5984721441039554
+2.6000000000000014	6.760000000000008	0.515501371821463
+2.7000000000000015	7.290000000000008	0.42737988023382856
+2.8000000000000016	7.840000000000009	0.3349881501559034
+2.9000000000000017	8.410000000000009	0.23924932921398068
+3.0000000000000018	9.00000000000001	0.14112000805986546
+3.100000000000002	9.610000000000012	0.041580662433288715
+3.200000000000002	10.240000000000013	-0.05837414342758186
+3.300000000000002	10.890000000000013	-0.1577456941432504
+3.400000000000002	11.560000000000015	-0.2555411020268334
+3.500000000000002	12.250000000000016	-0.35078322768962195
+3.6000000000000023	12.960000000000017	-0.44252044329485446
+3.7000000000000024	13.690000000000017	-0.5298361409084953
+3.8000000000000025	14.440000000000019	-0.611857890942721
+3.9000000000000026	15.21000000000002	-0.6877661591839757
+4.000000000000003	16.00000000000002	-0.75680249530793
+4.100000000000002	16.81000000000002	-0.8182771110644118
+4.200000000000002	17.640000000000015	-0.871575772413589
+4.300000000000002	18.490000000000013	-0.9161659367494557
+4.400000000000001	19.36000000000001	-0.9516020738895163
+4.500000000000001	20.250000000000007	-0.9775301176650972
+4.6000000000000005	21.160000000000004	-0.9936910036334645
+4.7	22.090000000000003	-0.9999232575641008
+4.8	23.04	-0.9961646088358407
+4.8999999999999995	24.009999999999994	-0.9824526126243326
+4.999999999999999	24.999999999999993	-0.9589242746631387
+5.099999999999999	26.009999999999987	-0.9258146823277328
+5.199999999999998	27.039999999999985	-0.883454655720154
+5.299999999999998	28.08999999999998	-0.8322674422239023
+5.399999999999998	29.159999999999975	-0.7727644875559888
+5.499999999999997	30.24999999999997	-0.7055403255703938
+5.599999999999997	31.359999999999967	-0.6312666378723236
+5.699999999999997	32.48999999999996	-0.5506855425976406
+5.799999999999996	33.63999999999996	-0.46460217941376053
+5.899999999999996	34.80999999999995	-0.3738766648302401
+5.999999999999996	35.99999999999995	-0.27941549819893013
+6.099999999999995	37.209999999999944	-0.18216250427210026
+6.199999999999995	38.439999999999934	-0.08308940281750171
+6.2999999999999945	39.689999999999934	0.016813900484344384
+6.399999999999994	40.95999999999992	0.11654920485048746
+6.499999999999994	42.24999999999992	0.21511998808780944
+6.599999999999993	43.55999999999991	0.3115413635133719
+6.699999999999993	44.88999999999991	0.4048499206165918
+6.799999999999993	46.2399999999999	0.494113351138602
+6.899999999999992	47.60999999999989	0.5784397643881937
+6.999999999999992	48.999999999999886	0.6569865987187831
+7.099999999999992	50.40999999999988	0.7289690401258704
+7.199999999999991	51.839999999999876	0.7936678638491478
+7.299999999999991	53.28999999999987	0.8504366206285597
+7.399999999999991	54.75999999999986	0.8987080958116226
+7.49999999999999	56.24999999999985	0.9379999767747355
+7.59999999999999	57.75999999999985	0.9679196720314839
+7.6999999999999895	59.289999999999836	0.9881682338769988
+7.799999999999989	60.83999999999983	0.9985433453746044
+7.899999999999989	62.409999999999826	0.9989413418397726
+7.9999999999999885	63.999999999999815	0.9893582466233835
+8.099999999999989	65.60999999999981	0.969889810845089
+8.199999999999989	67.23999999999981	0.9407305566797768
+8.299999999999988	68.8899999999998	0.9021718337562987
+8.399999999999988	70.5599999999998	0.854598908088287
+8.499999999999988	72.24999999999979	0.7984871126234978
+8.599999999999987	73.95999999999978	0.7343970978741218
+8.699999999999987	75.68999999999977	0.6629692300821927
+8.799999999999986	77.43999999999976	0.5849171928917732
+8.899999999999986	79.20999999999975	0.501020856457897
+8.999999999999986	80.99999999999974	0.4121184852417695
+9.099999999999985	82.80999999999973	0.31909836234936556
+9.199999999999985	84.63999999999973	0.22288991410026152
+9.299999999999985	86.48999999999971	0.12445442350707757
+9.399999999999984	88.3599999999997	0.02477542545337375
+9.499999999999984	90.2499999999997	-0.07515112046179337
+9.599999999999984	92.15999999999968	-0.17432678122296388
+9.699999999999983	94.08999999999968	-0.2717606264109271
+9.799999999999983	96.03999999999967	-0.3664791292519119
+9.899999999999983	98.00999999999965	-0.45753589377530557
+9.999999999999982	99.99999999999964	-0.5440211108893549
+10	100	-0.5440211108893698
+</textarea>
+<br><br>	OX parameters:
+<script>
+var sele="";
+        document.write('<select name="fwBox" id="fwBox" style="width : 50" onclick="onlycols()">');
+for(var i=0; i<8;i++) 
+{
+if (i==0) {sele="' selected>"} else {sele="'>"}
+document.write("<option value='"+i+sele+i+"</option>");
+}
+document.write('</select>');
+
+        document.write('<select name="E1X" id="E1X" style="width : 50">');
+for(var i=0; i<8;i++) 
+{
+if (i==0) {sele="' selected>"} else {sele="'>"}
+document.write("<option value='"+i+sele+i+"</option>");
+}
+document.write('</select>');
+
+//document.getElementById('fwBox').value=localStorage.getItem('varOX');
+
+</script>
+<br>
+
+<button onclick="var a0=document.getElementById('XPERS').value; var ab=trioseq(a0)+';'; var de=ab.split(';;'); var fg=de[0]; var bc=props(fg,'0;500'); document.getElementById('fw').value=bc">newX1X2(20;100;20)</button>
+
+<textarea id="XPERS" name="XPERS" cols="40" rows="2" WRAP = "off">-10;10</textarea>
+<textarea id="ABCD" name="ABCD" cols="40" rows="2" WRAP = "off">0;500</textarea>
+<br>
+
+<br><br>
+<textarea name="framewidth" id="fw" style="height:300px; width:400px;" onclick="this.value = this.value.replace(/[;]/g, '\t');this.value = this.value.replace(/[ ]/g, '\t')">100	100
+200	200
+300	300
+400	470
+500	500
+600	600
+700	700
+800	800
+900	900
+1000	1000</textarea></p>
+OY parameters:
+
+<script>
+var sele="";
+        document.write('<select name="fhBox" id="fhBox" style="width : 50" onclick="onlycols()">');
+for(var i=0; i<8;i++) 
+{
+if (i==1) {sele="' selected>"} else {sele="'>"}
+	document.write("<option value='"+i+sele+i+"</option>");
+}
+document.write('</select>');
+
+        document.write('<select name="E1Y" id="E1Y" style="width : 50">');
+for(var i=0; i<8;i++) 
+{
+if (i==1) {sele="' selected>"} else {sele="'>"}
+	document.write("<option value='"+i+sele+i+"</option>");
+}
+document.write('</select>');
+
+//document.getElementById('fhBox').value=localStorage.getItem('varOY');
+
+</script>
+<br>
+
+<textarea id="YPERS" name="YPERS" cols="40" rows="2" WRAP = "off">-10;10</textarea>
+<textarea id="YBCD" name="YBCD" cols="40" rows="2" WRAP = "off">500;0</textarea>
+<br>
+<br><br>
+<textarea name="frameheight" id="fh" style="height:300px; width:400px;" onclick="this.value = this.value.replace(/[;]/g, '\t');this.value = this.value.replace(/[ ]/g, '\t')">50	100
+100	200
+150	300
+200	400
+250	560
+300	600
+350	700
+400	800
+450	900
+500	1000</textarea></p>
+
+  <script type="text/javascript" src="XY.js"></script>
+
+<table>
+    <tr><td>Text to Save:</td></tr>
+    <tr>
+        <td colspan="3">
+            <textarea id="inputTextToSave" cols="80" rows="25"></textarea>
+        </td>
+    </tr>
+    <tr>
+        <td>Filename to Save As:</td>
+        <td><input id="inputFileNameToSaveAs"></input></td>
+        <td><button onclick="saveTextAsFile()">Save Text to File</button></td>
+    </tr>
+    <tr>
+        <td>Select a File to Load:</td>
+        <td><input type="file" id="fileToLoad"></td>
+        <td><button onclick="loadFileAsText()">Load Selected File</button><td>
+    </tr>
+</table>
+
+<textarea id="cols" name="cols" cols="25" rows="5" >0;6;;0;1#Js;Jr
+5;3;;5;7#dJb/dB;dJa/dB</textarea>
+<textarea id="tar0" name="tar0" cols="25" rows="5" ></textarea>
+<textarea id="sca" name="sca" cols="25" rows="5" ></textarea>
+<textarea id="ito" name="ito" cols="35" rows="5" ></textarea>
+
+</script>
+
+ 
+<script type="text/javascript">
+ 
+function saveTextAsFile()
+{
+    var textToSave = document.getElementById("inputTextToSave").value;
+    var textToSaveAsBlob = new Blob([textToSave], {type:"text/plain"});
+    var textToSaveAsURL = window.URL.createObjectURL(textToSaveAsBlob);
+    var fileNameToSaveAs = 'Plot.svg';//''document.getElementById("inputFileNameToSaveAs").value;
+ 
+    var downloadLink = document.createElement("a");
+    downloadLink.download = fileNameToSaveAs;
+    downloadLink.innerHTML = "Download File";
+    downloadLink.href = textToSaveAsURL;
+    downloadLink.onclick = destroyClickedElement;
+    downloadLink.style.display = "none";
+    document.body.appendChild(downloadLink);
+ 
+    downloadLink.click();
+}
+ 
+function destroyClickedElement(event)
+{
+    document.body.removeChild(event.target);
+}
+ 
+function loadFileAsText()
+{
+    var fileToLoad = document.getElementById("fileToLoad").files[0];
+ 
+    var fileReader = new FileReader();
+    fileReader.onload = function(fileLoadedEvent) 
+    {
+        var textFromFileLoaded = fileLoadedEvent.target.result;
+        document.getElementById("inputTextToSave").value = textFromFileLoaded;
+    };
+    fileReader.readAsText(fileToLoad, "UTF-8");
+}
+ 
+
+function lay1(n){var s1="div"+n.toString();return s1;}
+function tata(n){var s1="tar"+n.toString();return s1;}
+//function dTest(){var s1=document.getElementById('tt').value;alert(newX1X2( s1));}
+//function dTest(){alert(smartABS(3,4));}
+//function dTest(){alert(car2sphY("1;1;1;1"));}
+function dTest(){var s1=document.getElementById('tt').value;alert(car2sphY(s1));}
+
+function CLS2()
+{
+window.location.reload();
+//////////////////////document.getElementById('sca').value="";
+} 
+
+//var stest="0;1;;0;2\n\n0;3;;0;4\n\n0;1;;0;3\n\n0;2;;0;4";
+
+function plot2()
+{
+minimax(); 
+}
+
+function plot1(ik)
+{
+
+//alert('1234');
+
+stest = document.getElementById("cols").value;
+
+//alert(stest);
+
+var Nslov = stest.split("\n");
+var k=ik;
+var s=localStorage.getItem('variableName'); 
+var textArray = s.split("\n");
+document.getElementById('tar0').value=s;
+
+//alert('1234');
+
+//var slovo=Nslov[k];//"0;3;;0;4";
+var slovo=Nslov[0];//"0;3;;0;4";
+var slovs=slovo.split("#");
+slovo=slovs[0];
+//alert(slovo);
+//alert(slovs[1]);
+//k=1;
+//ik=1;
+var qx=nchar(slovo, ";;")+1;var er=slovo.split(";;");
+//
+var myDiv = document.getElementById(lay1(k));
+//var myDiv = document.getElementById(lay1(1));
+var data = [];var xx = [];var yy = []; var nmax=[]; var nako=['','']; var nakomax=[]; var Tmax=[]; var Tnako=[];
+var temps=['0.1','4']; var newNumber1; var newNumber0;
+for(var j=0; j<qx;j++) {
+nmax.push(0); nako.push(''); Tmax.push(0); Tnako.push(0); nakomax.push(1000);
+xx.push(new Array());yy.push(new Array());
+var sxy=er[j].split(";");var nx=parseFloat(sxy[0]);var ny=parseFloat(sxy[1]);
+for(var i=1; i<textArray.length;i++) {
+temps= textArray[i].split("\t");
+newNumber0=parseFloat(temps[nx]);xx[j].push(newNumber0);
+newNumber1=parseFloat(temps[ny]);yy[j].push(newNumber1);
+if (newNumber1>nmax[j] && newNumber1<1000000000 && i<1001) {nmax[j]=newNumber1; Tmax[j]=i;}
+if ((i%100)==0){
+nako[j]=nako[j]+";"+nmax[j].toString(); 
+if (newNumber1>nmax[j] && newNumber1<1000000000 && i<1001) {nmax[j]=newNumber1; Tmax[j]=i;}
+if (nakomax[j]>nmax[j] && nakomax[j]<1000000000 && nmax[j]!==0 && i<1001) {nakomax[j]=nmax[j]; Tnako[j]=Tmax[j];}
+nmax[j]=0;}
+//if ((i%50)==0){nako[j]=nmax[j].toString(); nmax[j]=0;}
+} }
+
+//alert('12345');
+
+var d3 = Plotly.d3,  N = 40,    x=xx[0], y=xx[0];
+var sl2= slovs[1].split(";");
+
+for(var j=0; j<qx;j++) {var str1=sl2[j]; data.push({x:xx[j],y:yy[j], name: str1, type:"scatter"});}
+  layout = { 
+xaxis: {
+    rangemode: 'tozero',
+    autorange: true
+  },
+dragmode: 'pan', 
+tickmode: 'array',
+annotations: [
+    {
+      title: 'x Axis',
+      x: 0,
+      y: 0,
+      xref: 'x',
+      yref: 'y',
+      text: '',//lay1(k),
+      showarrow: true,
+      arrowhead: 7,
+      ax: 0,
+      ay: 0
+    }
+  ]
+
+};
+
+//alert(tata(k));
+//alert('12340');
+
+
+Plotly.plot(myDiv, data, layout,{
+modeBarButtonsToRemove: ['toImage', 'sendDataToCloud'],  
+modeBarButtonsToAdd: [{name: 'toImage2',    icon: Plotly.Icons.camera,    
+click: function(gd) {Plotly.downloadImage(gd, {format: 'svg'}) } }]
+});
+
+myDiv.on('plotly_relayout',
+
+
+    function(eventdata){  
+
+ //////////var newIndex = myDiv.layout.annotations;
+
+       // var ab=lay1(k)+'\n' +
+       //     'x1:' + eventdata['xaxis.range[0]'] + '\n' +
+       //     'x2:' + eventdata['xaxis.range[1]'] + '\n' +
+       //     'y1:' + eventdata['yaxis.range[0]'] + '\n' +
+       //     'y2:' + eventdata['yaxis.range[1]'];
+var x1x2=eventdata['xaxis.range[0]']+";"+eventdata['xaxis.range[1]'];
+var y1y2=eventdata['yaxis.range[0]']+";"+eventdata['yaxis.range[1]'];
+//var a1=newX1X2(x1x2);
+//var a2=newX1X2(y1y2);
+
+var a1=newX1X2(x1x2);
+var a2=newX1X2(y1y2);
+
+var ab=trioseq(a1)+"\n"+trioseq(a2);
+
+//document.getElementById("Xsc"+k.toString()).value = trioseq(a1);//a1;
+//document.getElementById("Ysc"+k.toString()).value = trioseq(a2)//a2;
+
+//document.getElementById("Xsc"+k.toString()).value = x1x2;//a1;
+//document.getElementById("Ysc"+k.toString()).value = y1y2;//a2;
+
+document.getElementById("XPERS").value = x1x2;//a1;
+document.getElementById("YPERS").value = y1y2;//a2;
+
+//document.getElementById(tata(k)).value = ab;
+    });
+
+}
+
+
+</script>
+ 
+
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function (d, w, c) {
+        (w[c] = w[c] || []).push(function() {
+            try {
+                w.yaCounter42436314 = new Ya.Metrika({
+                    id:42436314,
+                    clickmap:true,
+                    trackLinks:true,
+                    accurateTrackBounce:true
+                });
+            } catch(e) { }
+        });
+
+        var n = d.getElementsByTagName("script")[0],
+            s = d.createElement("script"),
+            f = function () { n.parentNode.insertBefore(s, n); };
+        s.type = "text/javascript";
+        s.async = true;
+        s.src = "https://mc.yandex.ru/metrika/watch.js";
+
+        if (w.opera == "[object Opera]") {
+            d.addEventListener("DOMContentLoaded", f, false);
+        } else { f(); }
+    })(document, window, "yandex_metrika_callbacks");
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/42436314" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
+</body>
